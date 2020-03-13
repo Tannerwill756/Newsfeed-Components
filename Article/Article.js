@@ -88,6 +88,7 @@ const data = [
   }
 ];
 
+console.log (data);
 /* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
   
   <div class="article">
@@ -112,3 +113,64 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+// new article
+const newArticle = {
+  title: 'How to eat cheeseburgers!!!!',
+  date: 'March 3rd, 2020',
+  firstParagraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+  secondParagraph: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?',
+  thirdParagraph: 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat'
+  };
+
+data.push(newArticle);
+
+
+
+function createData (title, date, firstParagraph, secondParagraph, thirdParagraph){
+  const articleDiv = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('p');
+  const firstPara = document.createElement('p');
+  const secondPara = document.createElement('p');
+  const thirdPara = document.createElement('p');
+  const expandBtn = document.createElement('span');
+
+  articleDiv.append(articleTitle);
+  articleDiv.append(articleDate);
+  articleDiv.append(firstPara);
+  articleDiv.append(secondPara);
+  articleDiv.append(thirdPara);
+  articleDiv.append(expandBtn);
+
+  articleDiv.classList.add('article');
+  articleDate.classList.add('date');
+  expandBtn.classList.add('expandButton');
+
+  const open = '\u25bc';
+
+  articleTitle.textContent = title;
+  articleDate.textContent = date;
+  firstPara.textContent = firstParagraph;
+  secondPara.textContent = secondParagraph;
+  thirdPara.textContent = thirdParagraph;
+  expandBtn.textContent = open;
+
+  expandBtn.addEventListener('click', event => {
+    console.log('button clicked', event.target);
+    articleDiv.classList.toggle('article-open');
+  });
+
+
+  return articleDiv;
+}
+
+const articles = document.querySelector('.articles');
+
+data.map( x => {
+  // console.log('creating panel', x.title);
+  articles.appendChild(createData(x.title, x.date, x.firstParagraph, x.secondParagraph, x.thirdParagraph));
+});
+
+
+
